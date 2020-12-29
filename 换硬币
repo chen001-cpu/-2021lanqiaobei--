@@ -1,0 +1,83 @@
+将一笔零钱换成5分、2分和1分的硬币，要求每种硬币至少有一枚，有几种不同的换法？
+
+第一个代码是我编辑的是有问题的。
+问题就是我的代码和答案的代码出入不大，但是我的却不可正常运行。
+！！！！！！第一个代码有问题！！！！！
+！！！！！！原因后面会解释！！！！！！
+#include<stdio.h>
+int main()
+{
+	int s,i,j,k,t=0;
+	scanf("%d",&s);
+	for(i=s/5;i>=1;i--);
+	{
+		for(j=(s-5*i)/2;j>=1;j--)
+		{
+			for(k=(s-i*5-j*2);k>=1;k--)
+			{
+				if((5*i+2*j+k)==s)
+			{
+			t++;
+			printf("fen5:%d, fen2:%d, fen1:%d, total:%d\n",i,j,k,i+j+k);
+		    } 
+			}
+		}
+	}
+	printf("count = %d\n",t);
+	return 0;
+}
+
+然后我又重新写了一次：
+竟然对了，所以我第一次的到底有啥问题，蜜汁疑惑？？
+
+
+#include<stdio.h>
+int main()
+{
+	int i,j,k,s,t=0;
+	scanf("%d",&s);
+	for(i=s/5;i>=1;i--)
+	{
+		for(j=(s-5*i)/2;j>=1;j--)
+		{
+			for(k=(s-5*i-2*j);k>=1;k--)
+			{
+				if((k+i*5+j*2)==s)
+				{
+					printf("fen5:%d, fen2:%d, fen1:%d, total:%d\n",i,j,k,i+j+k);
+					t++;
+				}
+			}
+		}
+    }
+	printf("count = %d",t);
+	return 0;
+	 
+ } 
+ 
+我从头开始有人真的的检查了代码，看了好几次，终于发现了原因：
+第一个循环的后边我加了分号。。。。
+唉，大意了；
+
+
+
+这个是答案给的代码，是正确的
+
+
+#include<stdio.h>
+int main(){
+    int money,sum=0,i,j,k,count=0;
+    scanf("%d",&money);
+    for(i=money/5;i>=1;i--){
+        for(j=(money-5*i)/2;j>=1;j--){
+            for(k=(money-5*i-2*j);k>=1;k--){
+                if((5*i+2*j+k)==money){
+                    printf("fen5:%d, fen2:%d, fen1:%d, total:%d\n",i,j,k,i+j+k);
+                    count++;
+                }
+            }
+        }
+    }
+    printf("count = %d",count);
+    return 0;
+}
